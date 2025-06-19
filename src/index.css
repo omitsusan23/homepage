@@ -4,4 +4,5 @@
 
 body {
   @apply text-gray-800;
+  font-family: 'Noto Sans JP', sans-serif;
 }
