@@ -14,7 +14,7 @@ export default function About() {
           <dt className="font-bold text-primary border-b-2 border-primary pb-1">電話番号</dt>
           <dd className="mb-2 md:mb-0">011-252-9336</dd>
           <dt className="font-bold text-primary border-b-2 border-primary pb-1">代表者名</dt>
-          <dd className="mb-2 md:mb-0">代表取締役 矢﨑 成光</dd>
+          <dd className="mb-2 md:mb-0">代表取締役 先﨑 成光</dd>
           <dt className="font-bold text-primary border-b-2 border-primary pb-1">設立</dt>
           <dd className="mb-2 md:mb-0">2024年4月17日</dd>
           <dt className="font-bold text-primary border-b-2 border-primary pb-1">資本金</dt>
