@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { FaLightbulb, FaUsers, FaChartLine, FaGlobeAsia, FaCogs, FaHandshake } from "react-icons/fa";
 
 const corporateInfo = [
   "株式会社RePlayは、デジタルマーケティングの新たな可能性を追求する広告代理店です。",
@@ -11,6 +12,16 @@ const corporateInfo = [
   "地域密着型のサービスを展開し、北海道の企業様のデジタル化を支援します。",
   "常に最新のトレンドをキャッチし、イノベーティブなソリューションを提供します。",
   "企業のブランド価値を高め、持続可能な成長を実現するための戦略を提案します。",
+];
+
+const corporateInfoRich = [
+  {
+    icon: <FaLightbulb className="text-yellow-400 text-3xl" />, title: "イノベーション", desc: "最新のデジタル技術とクリエイティブで新しい価値を創造" },
+  { icon: <FaUsers className="text-blue-400 text-3xl" />, title: "専門家チーム", desc: "経験豊富なプロフェッショナルが最適な戦略を提案" },
+  { icon: <FaChartLine className="text-pink-400 text-3xl" />, title: "データドリブン", desc: "効果測定・改善を徹底し、成長を最大化" },
+  { icon: <FaGlobeAsia className="text-green-400 text-3xl" />, title: "地域密着・全国対応", desc: "北海道から全国の企業をサポート" },
+  { icon: <FaCogs className="text-indigo-400 text-3xl" />, title: "ワンストップ対応", desc: "SNS・広告・制作・分析まで一貫サポート" },
+  { icon: <FaHandshake className="text-orange-400 text-3xl" />, title: "パートナーシップ", desc: "長期的な信頼関係を大切に" },
 ];
 
 const services = [
@@ -174,32 +185,30 @@ export default function Top() {
       <canvas ref={bgRef} className="fixed inset-0 w-full h-full z-0 pointer-events-none" style={{position:'fixed'}} />
 
       {/* Heroセクション */}
-      <section className="relative z-10 flex flex-col items-center justify-center text-white text-center min-h-[60vh] py-24">
-        <h1 className="text-4xl md:text-6xl font-extrabold drop-shadow animate-fadein mb-6 tracking-tight">
-          デジタルの力で<br className="hidden md:inline" />未来を創造する
-        </h1>
-        <p className="text-lg md:text-2xl font-medium mb-8 drop-shadow animate-fadein2">
-          SNS・広告・クリエイティブ・データ分析で<br className="hidden md:inline" />ビジネスの成長を最大化
-        </p>
-        <a
-          href="/contact"
-          className="inline-block bg-primary hover:bg-red-700 transition text-white font-bold px-8 py-3 rounded-full shadow-lg text-lg animate-bounce"
-        >
-          お問い合わせはこちら
-        </a>
+      <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-[60vh] pt-32 pb-12">
+        <div className="bg-black/60 rounded-2xl px-8 py-10 md:px-16 md:py-16 shadow-2xl inline-block animate-fadein">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-4 tracking-tight leading-tight">
+            デジタルの力で<br className="hidden md:inline" />未来を創造する
+          </h1>
+          <p className="text-lg md:text-2xl font-semibold text-white/90 mb-0 drop-shadow animate-fadein2">
+            SNS・広告・クリエイティブ・データ分析でビジネスの成長を最大化
+          </p>
+        </div>
       </section>
 
-      {/* コーポレート情報 */}
-      <section className="relative z-10 max-w-3xl mx-auto my-12 px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 border-4 border-black py-2 bg-white/80 inline-block rounded-lg animate-fadein">
-          コーポレート情報
+      {/* コーポレート情報（リッチカード型） */}
+      <section className="relative z-10 max-w-6xl mx-auto my-16 px-4">
+        <h2 className="text-3xl font-bold text-center mb-8 animate-fadein">
+          <span className="bg-gradient-to-r from-primary to-pink-400 bg-clip-text text-transparent">REPLAYの強み</span>
         </h2>
-        <div className="bg-white/90 shadow-xl rounded-xl p-8 md:p-12 animate-fadein2">
-          <ul className="space-y-4 text-gray-800 text-base md:text-lg">
-            {corporateInfo.map((line, i) => (
-              <li key={i} className="leading-relaxed">{line}</li>
-            ))}
-          </ul>
+        <div className="grid md:grid-cols-3 gap-8">
+          {corporateInfoRich.map((info, i) => (
+            <div key={i} className="bg-white/90 shadow-2xl rounded-2xl p-8 flex flex-col items-center text-center border-t-4 border-b-4 border-primary/30 hover:scale-105 transition-transform duration-300 animate-fadein2">
+              <div className="mb-3">{info.icon}</div>
+              <div className="font-bold text-lg mb-1 text-gray-800">{info.title}</div>
+              <div className="text-gray-600 text-base">{info.desc}</div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -211,14 +220,15 @@ export default function Top() {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((s, idx) => (
-            <div key={s.title} className="bg-white/90 shadow-xl rounded-xl p-6 flex flex-col hover:scale-105 transition-transform duration-300 animate-fadein2">
-              <div className="font-bold text-primary text-lg border-b-2 border-primary pb-1 mb-2 flex items-center gap-2">
+            <div key={s.title} className="bg-white/95 shadow-xl rounded-2xl p-6 flex flex-col hover:scale-105 transition-transform duration-300 animate-fadein2 border border-primary/10">
+              <div className="font-bold text-primary text-lg border-b-2 border-primary pb-1 mb-3 flex items-center gap-2">
                 <span className="inline-block animate-pop" style={{animationDelay: `${idx * 0.1}s`}}>{s.title}</span>
               </div>
-              <ul className="list-disc list-inside text-sm md:text-base space-y-1 mt-2">
-                {s.items.map((item, i) => (
+              <ul className="list-disc list-inside text-base md:text-lg space-y-1 mt-2 text-gray-800 font-medium">
+                {s.items.slice(0, 3).map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}
+                {s.items.length > 3 && <li className="text-sm text-gray-500 mt-2">…他多数</li>}
               </ul>
             </div>
           ))}
@@ -233,17 +243,32 @@ export default function Top() {
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {solutions.map((s, idx) => (
-            <div key={s.title} className="bg-white/90 shadow-xl rounded-xl p-6 flex flex-col hover:scale-105 transition-transform duration-300 animate-fadein2">
-              <div className="font-bold text-primary text-lg border-b-2 border-primary pb-1 mb-2 flex items-center gap-2">
+            <div key={s.title} className="bg-white/95 shadow-xl rounded-2xl p-6 flex flex-col hover:scale-105 transition-transform duration-300 animate-fadein2 border border-primary/10">
+              <div className="font-bold text-primary text-lg border-b-2 border-primary pb-1 mb-3 flex items-center gap-2">
                 <span className="inline-block animate-pop" style={{animationDelay: `${idx * 0.1 + 0.2}s`}}>{s.title}</span>
               </div>
-              <ul className="list-disc list-inside text-sm md:text-base space-y-1 mt-2">
-                {s.items.map((item, i) => (
+              <ul className="list-disc list-inside text-base md:text-lg space-y-1 mt-2 text-gray-800 font-medium">
+                {s.items.slice(0, 3).map((item, i) => (
                   <li key={i}>{item}</li>
                 ))}
+                {s.items.length > 3 && <li className="text-sm text-gray-500 mt-2">…他多数</li>}
               </ul>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* お問い合わせCTA（ページ最下部） */}
+      <section className="relative z-10 max-w-2xl mx-auto my-24 px-4 text-center">
+        <div className="bg-gradient-to-r from-primary to-pink-400 text-white rounded-2xl shadow-2xl p-10 animate-fadein2 border-4 border-white/30">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 drop-shadow">ご相談・お問い合わせはこちら</h2>
+          <p className="mb-6 text-lg md:text-xl drop-shadow">SNS運用・広告・制作・分析など、まずはお気軽にご相談ください。</p>
+          <a
+            href="/contact"
+            className="inline-block bg-white text-primary font-bold px-10 py-4 rounded-full shadow-lg text-lg hover:bg-gray-100 transition border-2 border-primary"
+          >
+            お問い合わせフォームへ
+          </a>
         </div>
       </section>
     </div>
