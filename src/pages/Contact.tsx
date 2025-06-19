@@ -26,7 +26,7 @@ export default function Contact() {
           <button type="submit" className="bg-primary text-white px-8 py-2 rounded font-bold hover:bg-red-700 transition">送信</button>
         </form>
         <div className="mt-8 text-xs text-gray-500">
-          ※本フォームは静的なサンプルです。送信機能はありません。<br />
+         <br />
           お急ぎの場合はお電話（011-252-9336）までご連絡ください。
         </div>
       </div>
