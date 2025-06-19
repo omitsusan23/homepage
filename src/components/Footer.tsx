@@ -7,7 +7,7 @@ export default function Footer() {
           <div>〒060-0063 北海道札幌市中央区南6条西3丁目10 セントラルビル三階</div>
           <div>TEL: 011-252-9336</div>
           <div>Email: info@replay.co.jp</div>
-          <div>代表取締役: 矢﨑 成光</div>
+          <div>代表取締役: 先﨑 成光</div>
           <div>資本金: 300万円</div>
           <div>設立: 2024年4月17日</div>
         </div>
