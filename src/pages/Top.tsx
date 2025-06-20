@@ -189,14 +189,14 @@ export default function Top() {
         <img
           src="/office1.jpg"
           alt="オフィス風ヒーロー画像"
-          className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+          className="absolute inset-0 w-full h-full object-cover object-center"
           style={{zIndex:1}}
         />
         <div className="relative flex flex-col justify-center h-full pl-8 md:pl-20" style={{zIndex:2, maxWidth:'700px', textAlign:'left'}}>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-4 tracking-tight leading-tight bg-black/50 p-4 rounded-lg">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-4 tracking-tight leading-tight">
             デジタルの力で<br />未来を創造する
           </h1>
-          <p className="text-lg md:text-2xl font-semibold text-white/90 drop-shadow bg-black/40 p-3 rounded-md">
+          <p className="text-lg md:text-2xl font-semibold text-white/90 drop-shadow">
             SNS・広告・クリエイティブ・データ分析でビジネスの成長を最大化
           </p>
         </div>
