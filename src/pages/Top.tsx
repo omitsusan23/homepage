@@ -220,10 +220,9 @@ export default function Top() {
 
       {/* 中段画像 */}
       <section className="w-full flex justify-center py-8 animate-fadein2 relative">
-        {/* 右寄せテキスト */}
-        <div className="absolute top-6 right-10 z-10 text-right max-w-xl w-full pointer-events-none">
-          <p className="text-white text-xl md:text-2xl font-bold drop-shadow-lg mb-2">最先端のテクノロジーで課題を解決</p>
-          <p className="text-white text-lg md:text-xl font-semibold drop-shadow">お客様のビジネスに新たな価値を創出</p>
+        <div className="absolute bottom-10 right-10 z-10 text-right max-w-2xl w-full pointer-events-none flex flex-col items-end pr-8">
+          <p className="text-white text-2xl md:text-4xl font-bold drop-shadow-lg mb-3 leading-tight">最先端のテクノロジーで課題を解決</p>
+          <p className="text-white text-xl md:text-2xl font-semibold drop-shadow leading-tight">お客様のビジネスに新たな価値を創出</p>
         </div>
         <img
           src="/office2.jpg"
