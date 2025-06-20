@@ -184,20 +184,26 @@ export default function Top() {
       {/* アニメーション背景 */}
       <canvas ref={bgRef} className="fixed inset-0 w-full h-full z-0 pointer-events-none" style={{position:'fixed'}} />
 
-      {/* Heroセクション */}
-      <section className="relative z-10 flex flex-col items-center justify-center text-center min-h-[60vh] pt-32 pb-12">
-        <div className="bg-black/60 rounded-2xl px-8 py-10 md:px-16 md:py-16 shadow-2xl inline-block animate-fadein">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-4 tracking-tight leading-tight">
-            デジタルの力で<br className="hidden md:inline" />未来を創造する
+      {/* Hero画像＋テキスト */}
+      <section className="relative z-10 w-full h-[48vw] min-h-[320px] max-h-[480px] flex items-center" style={{overflow:'hidden'}}>
+        <img
+          src="/office1.jpg"
+          alt="オフィス風ヒーロー画像"
+          className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+          style={{zIndex:1}}
+        />
+        <div className="relative flex flex-col justify-center h-full pl-8 md:pl-20" style={{zIndex:2, maxWidth:'700px', textAlign:'left'}}>
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg mb-4 tracking-tight leading-tight bg-black/50 p-4 rounded-lg">
+            デジタルの力で<br />未来を創造する
           </h1>
-          <p className="text-lg md:text-2xl font-semibold text-white/90 mb-0 drop-shadow animate-fadein2">
+          <p className="text-lg md:text-2xl font-semibold text-white/90 drop-shadow bg-black/40 p-3 rounded-md">
             SNS・広告・クリエイティブ・データ分析でビジネスの成長を最大化
           </p>
         </div>
       </section>
 
       {/* コーポレート情報（リッチカード型） */}
-      <section className="relative z-10 max-w-6xl mx-auto my-16 px-4">
+      <section className="max-w-6xl mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold text-center mb-8 animate-fadein">
           <span className="bg-gradient-to-r from-primary to-pink-400 bg-clip-text text-transparent">REPLAYの強み</span>
         </h2>
@@ -210,6 +216,16 @@ export default function Top() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* 中段画像 */}
+      <section className="w-full flex justify-center py-8 animate-fadein2">
+        <img
+          src="/office2.jpg"
+          alt="チーム作業風オフィス画像"
+          className="rounded-2xl shadow-2xl max-w-4xl w-full object-cover object-center"
+          style={{maxHeight:'420px'}}
+        />
       </section>
 
       {/* サービス */}
