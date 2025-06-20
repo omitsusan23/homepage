@@ -219,17 +219,21 @@ export default function Top() {
       </section>
 
       {/* 中段画像 */}
-      <section className="w-full flex justify-center py-8 animate-fadein2 relative">
-        <div className="absolute bottom-10 right-10 z-10 text-right max-w-2xl w-full pointer-events-none flex flex-col items-end pr-8">
-          <p className="text-white text-2xl md:text-4xl font-bold drop-shadow-lg mb-3 leading-tight">最先端のテクノロジーで課題を解決</p>
-          <p className="text-white text-xl md:text-2xl font-semibold drop-shadow leading-tight">お客様のビジネスに新たな価値を創出</p>
+      <section className="w-full flex justify-center py-8 animate-fadein2">
+        <div className="relative max-w-4xl w-full">
+          <img
+            src="/office2.jpg"
+            alt="チーム作業風オフィス画像"
+            className="rounded-2xl shadow-2xl w-full object-cover object-center max-h-[420px]"
+            style={{maxHeight:'420px'}}
+          />
+          <div className="absolute bottom-0 right-0 w-full h-full flex flex-col items-end justify-end p-6 pointer-events-none overflow-hidden">
+            <div className="max-w-full">
+              <p className="text-white text-2xl md:text-4xl font-bold drop-shadow-lg mb-2 leading-tight whitespace-pre-line break-words">最先端のテクノロジーで課題を解決</p>
+              <p className="text-white text-xl md:text-2xl font-semibold drop-shadow leading-tight whitespace-pre-line break-words">お客様のビジネスに新たな価値を創出</p>
+            </div>
+          </div>
         </div>
-        <img
-          src="/office2.jpg"
-          alt="チーム作業風オフィス画像"
-          className="rounded-2xl shadow-2xl max-w-4xl w-full object-cover object-center"
-          style={{maxHeight:'420px'}}
-        />
       </section>
 
       {/* サービス */}
