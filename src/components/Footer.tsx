@@ -3,8 +3,8 @@ export default function Footer() {
     <footer className="bg-gray-100 py-8 mt-12 shadow-inner">
       <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6 text-sm px-4">
         <div className="text-left space-y-1">
-          <div className="font-bold text-base mb-1">株式会社 REPLAY</div>
-          <div>〒060-0063 北海道札幌市中央区南6条西3丁目10 セントラルビル三階</div>
+          <div className="font-bold text-base mb-1">株式会社 RePlay</div>
+          <div>〒060-0063 北海道札幌市中央区南６条西３丁目11-3 セントラルビル３階</div>
           <div>TEL: 011-252-9336</div>
           <div>Email: info@replay.co.jp</div>
           <div>代表取締役: 先﨑 成光</div>
