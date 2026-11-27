@@ -6,33 +6,20 @@ export default function Contact() {
         <span className="block w-16 h-1 bg-primary mx-auto mt-2 rounded" />
       </h2>
       <div className="bg-white shadow-lg rounded-lg p-8">
-        <form className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block font-semibold mb-1">お名前</label>
-            <input id="name" type="text" placeholder="お名前" className="w-full border p-2 rounded" />
-          </div>
-          <div>
-            <label htmlFor="email" className="block font-semibold mb-1">メールアドレス</label>
-            <input id="email" type="email" placeholder="メールアドレス" className="w-full border p-2 rounded" />
-          </div>
-          <div>
-            <label htmlFor="tel" className="block font-semibold mb-1">電話番号</label>
-            <input id="tel" type="tel" placeholder="電話番号" className="w-full border p-2 rounded" />
-          </div>
-          <div>
-            <label htmlFor="message" className="block font-semibold mb-1">お問い合わせ内容</label>
-            <textarea id="message" placeholder="お問い合わせ内容" className="w-full border p-2 rounded" rows={4}></textarea>
-          </div>
-          <button type="submit" className="bg-primary text-white px-8 py-2 rounded font-bold hover:bg-red-700 transition">送信</button>
-        </form>
-        <div className="mt-8 text-xs text-gray-500">
-         <br />
-          お急ぎの場合はお電話（011-252-9336）までご連絡ください。
+        <p className="mb-6 text-gray-700">お問い合わせは、メールまたはお電話で承ります。</p>
+        <div className="flex flex-col gap-4">
+          <a href="mailto:info@replay.co.jp" className="bg-primary text-white px-6 py-3 rounded font-bold text-center hover:bg-red-700">
+            メールで問い合わせる
+          </a>
+          <p className="text-sm text-gray-600">メールアプリが開きます。宛先：info@replay.co.jp</p>
+          <a href="tel:0112529336" className="border border-primary text-primary px-6 py-3 rounded font-bold text-center hover:bg-red-50">
+            電話：011-252-9336
+          </a>
         </div>
       </div>
       <div className="mt-8 text-center text-sm text-gray-600">
-        <div>株式会社REPLAY</div>
-        <div>〒060-0063 北海道札幌市中央区南6条西3丁目10 セントラルビル三階</div>
+        <div>株式会社RePlay</div>
+        <div>〒060-0063 北海道札幌市中央区南６条西３丁目11-3 セントラルビル３階</div>
         <div>TEL: 011-252-9336</div>
         <div>Email: info@replay.co.jp</div>
       </div>

@@ -13,7 +13,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 bg-white shadow z-50">
       <div className="max-w-5xl mx-auto flex items-center justify-between p-4">
         <Link to="/" className="font-bold text-xl tracking-wide">
-          株式会社 <span className="font-extrabold">REPLAY</span>
+          株式会社 <span className="font-extrabold">RePlay</span>
         </Link>
         <nav className="space-x-4" aria-label="メインナビゲーション">
           {navItems.map((item) => (

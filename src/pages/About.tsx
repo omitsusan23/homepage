@@ -8,9 +8,9 @@ export default function About() {
       <div className="bg-white shadow-lg rounded-lg p-8">
         <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
           <dt className="font-bold text-primary border-b-2 border-primary pb-1">会社名</dt>
-          <dd className="mb-2 md:mb-0">株式会社REPLAY</dd>
+          <dd className="mb-2 md:mb-0">株式会社RePlay</dd>
           <dt className="font-bold text-primary border-b-2 border-primary pb-1">所在地</dt>
-          <dd className="mb-2 md:mb-0">〒060-0063 北海道札幌市中央区南6条西3丁目10 セントラルビル三階</dd>
+          <dd className="mb-2 md:mb-0">〒060-0063 北海道札幌市中央区南６条西３丁目11-3 セントラルビル３階</dd>
           <dt className="font-bold text-primary border-b-2 border-primary pb-1">電話番号</dt>
           <dd className="mb-2 md:mb-0">011-252-9336</dd>
           <dt className="font-bold text-primary border-b-2 border-primary pb-1">代表者名</dt>

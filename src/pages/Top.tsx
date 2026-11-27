@@ -205,7 +205,7 @@ export default function Top() {
       {/* コーポレート情報（リッチカード型） */}
       <section className="max-w-6xl mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold text-center mb-8 animate-fadein">
-          <span className="bg-gradient-to-r from-primary to-pink-400 bg-clip-text text-transparent">REPLAYの強み</span>
+          <span className="bg-gradient-to-r from-primary to-pink-400 bg-clip-text text-transparent">RePlayの強み</span>
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {corporateInfoRich.map((info, i) => (
@@ -291,7 +291,7 @@ export default function Top() {
             href="/contact"
             className="inline-block bg-white text-primary font-bold px-10 py-4 rounded-full shadow-lg text-lg hover:bg-gray-100 transition border-2 border-primary"
           >
-            お問い合わせフォームへ
+            お問い合わせ先を見る
           </a>
         </div>
       </section>

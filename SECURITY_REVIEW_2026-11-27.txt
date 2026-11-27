@@ -1,0 +1,138 @@
+修正追記（2026年11月27日）
+以下は調査後にローカルで実装・検証した内容。下段の元の報告は修正前の調査記録。
+
+実装済み
+・Vite 8.4.0、React用プラグイン6.3.0、React Router 7.18.7、Tailwind 3.4.19へ更新。
+・間接依存も更新し、npm auditの警告を17パッケージから0へ解消。本番依存も0。
+・vercel.jsonにCSP、nosniff、埋め込み拒否、Referrer-Policy、Permissions-Policyを追加。
+・スクリプトのインライン実行・外部スクリプト・未許可の外部通信・フォーム送信を制限。
+・インラインstyleは既存React表示のため許可。Google FontsのCSSとフォントを許可。
+・Vercelのビルド前に型チェックを実行する設定を追加。
+・node_modules/とdist/をGitの追跡対象から除外。.env等も.gitignoreに追加。
+  ファイルはローカルに保持し、Git履歴の書き換えや過去コミットの削除はしていない。
+・Node.js 24を.nvmrcに指定。package.jsonはES Modulesに統一。
+・GitHub Actionsにクリーンインストール、脆弱性監査、型チェック、ビルドを設定。
+  Actionsの権限はcontents: read、使用ActionsはコミットSHA固定。
+・Dependabotを週次実行する設定を追加。
+・機能していなかった問い合わせフォームをメール・電話のリンクへ変更。
+  メールアプリを開くことを画面に明記。サイト内でのメール送信やメール配送は未実装・未検証。
+・全ページの社名をRePlay、住所を中央区南６条西３丁目11-3 セントラルビル３階へ統一。
+・READMEに開発・確認・公開手順とセキュリティ設定の前提を記載。
+
+検証済み
+・npm ci --ignore-scripts 成功。
+・npm audit --audit-level=moderate: 0 vulnerabilities。
+・npm audit --omit=dev --audit-level=moderate: 0 vulnerabilities。
+・npm run check、npm run build 成功。
+・修正後のpackage-lock.jsonの解決先に非公式レジストリなし。
+・vercel.jsonのヘッダーを付与する一時ローカルサーバーでブラウザー検証。
+  全6ページ（トップ、会社概要、サービス、ソリューション、プライバシー、お問い合わせ）を取得・描画。
+  ページ遷移成功、通常表示のJavaScript/コンソールエラーなし、画像エラーなし。
+  メール・電話リンクの宛先とフォーム不在を確認。実際のメール・電話発信は行っていない。
+  問い合わせページを幅390pxで確認し、横方向のオーバーフローなし。
+・CSP遮断テストでインラインscriptと未許可の外部fetchが拒否されることを確認。
+  この遮断テストによるコンソールエラーは期待どおりの動作。
+・Gitの空白エラーチェック成功。
+
+未実施・残る確認
+・コミット、GitHubへのpush、Vercelへのデプロイは未実施。
+・セキュリティヘッダーを含む今回の変更は公開サイトにはまだ反映していない。
+・GitHub Actions/Dependabotの実際の実行と、Vercel本番環境での設定反映はpush・デプロイ後の確認が必要。
+・GitHub/Vercel/ドメインのアカウント監査、2要素認証・権限・履歴の確認は引き続き未確認。
+・既知脆弱性の警告0は、未知の脆弱性がないことや侵入歴がないことの保証ではない。
+
+------------------------------------------------------------
+修正前の調査記録
+------------------------------------------------------------
+
+ホームページ セキュリティ調査報告書
+調査日: 2026年11月27日（日本時間）
+対象: /Users/senzakimasamitsu/Projects/homepage と https://replay-0417.info/
+調査時点のGit HEAD: b7361ff
+
+結論
+確認した範囲で不正改ざん・情報窃取コード・秘密情報漏えいを示す証拠は見つからなかった。
+公開HTML・JavaScript・CSSは、別の一時ディレクトリで公式npmレジストリの依存関係を使って再ビルドした成果物とバイト単位で完全一致した。
+これは現在の公開ファイルと手元のソースの整合性を示す。過去の侵入、管理アカウントの乗っ取り、条件付き配信、未取得の公開アセット、DNS管理権限の安全性までは証明しない。
+アプリの変更・依存更新・コミット・デプロイは実施していない。
+
+構成
+React 18.3.1 / TypeScript / React Router 6.30.1 / Vite 5.4.19。
+Vercelから配信されるブラウザー側の静的SPA。手元のアプリにはPHP、WordPress、認証、DB、サーバーAPIは見当たらない。
+React Server Components関連の依存やサーバー処理はなく、React2Shell（CVE-2025-55182）の対象構成ではない。
+
+調査と証拠
+1. src以下11ファイル、HTML、ビルド設定、ホスティング設定を確認。
+   アプリにeval、動的Function、dangerouslySetInnerHTML、任意HTML挿入、Cookie読取、外部API送信、Service Worker登録などの不審な処理は見当たらない。
+   公開JS内のfetchはViteのmodulepreload互換処理。未知の外部送信先は確認できなかった。
+   外部参照はGoogle Fonts、SNSの一般リンク等。SNSリンクは企業アカウントではなく各サービスのトップページ。
+2. ローカルに存在する全23コミットの履歴を対象とし、依存・distを除く48個の履歴blobを秘密情報パターンで走査。
+   秘密鍵、GitHubトークン、AWSアクセスキー、長いsecret/password/token代入のパターン一致なし。
+   .envや秘密鍵に該当する履歴ファイル名もなし。
+   パターン走査は未知の形式の秘密情報や削除済み到達不能オブジェクトまで保証しない。
+   コミット作者名の一致は本人の作業である証明にはならない。
+3. package-lock.jsonの解決先はすべて公式npmレジストリ。
+   インストールスクリプトは実行せず、一時ディレクトリでnpm ci --ignore-scriptsを実施。
+   4345個の既存依存ファイルが新規インストールと一致。
+   差異はesbuildのLinux用実行ファイルとインストールメタデータ。既存esbuild実行ファイルは既存Linux配布パッケージの実行ファイルと一致。
+   新規インストールにない29ファイルは開発キャッシュ・プラットフォーム差分等。全依存のマルウェア解析や全履歴依存の完全性保証はしていない。
+4. 一時ディレクトリでnpm run build成功。
+   公開HTML、JS、CSSの全3ファイルが再ビルドと完全一致。
+   JS SHA-256: afde29b3b354d006ac24b314dddd44f66c676125ca0f055bc96ee374365fa0ce
+   CSS SHA-256: b050b9df818ab8ea3e998ce91c62b00345ea8b3b22697b03041fa702e814b1ac
+5. /.env、/.git/HEAD、/package.json、/src/main.tsx、/@vite/client、/node_modules/vite/package.json、JSの.map URLを通常のGETで確認。
+   すべてトップページと同じHTMLが返った。HTTP 200だが秘密ファイルの内容が返ったわけではなく、SPA用rewriteの動作。
+   確認したURLにおける秘密ファイル漏えい・Vite開発サーバーの露出は確認できなかった。
+6. HTTPはHTTPSへ308リダイレクト。HTTPS証明書のホスト名と信頼チェーンを検証できた。
+   証明書有効期限: 2027年1月28日。HSTSあり。
+   接続はTLS 1.2で成功。これはTLS 1.3非対応という意味ではなく、古いTLSを拒否するかの網羅的検査でもない。
+
+確認できた問題と優先度
+優先1: 依存関係の更新
+npm audit: 17パッケージ（高13、中3、低1、critical 0）。本番依存のみでは3パッケージが高。
+同じ脆弱性の依存元への波及を含むパッケージ数であり、17個の独立した攻撃経路や侵入件数ではない。
+本番依存の対象は@remix-run/router、react-router、react-router-dom。
+高リスクXSSのGHSA-2w69-qvjg-hvjxは公式にBrowserRouterのDeclarative Modeを対象外としており、本サイトはその構成。
+またURLは固定文字列で、外部入力からのredirectやSSR hydrationの利用は見当たらない。
+その他の警告も使用条件ごとに評価が必要。対象外の警告があることを理由に更新不要とはしない。
+Vite等の開発用脆弱性は、静的配信される本番への直接攻撃と開発環境への攻撃を分ける必要がある。
+依存を更新し、クリーンインストールとビルド・画面動作確認後にデプロイすることを推奨。
+
+優先2: HTTPセキュリティヘッダー
+取得したトップページにはContent-Security-Policy、X-Content-Type-Options、X-Frame-Options、Referrer-Policy、Permissions-Policyがなかった。
+CSP frame-ancestorsを含む埋め込み制限、nosniff、適切なCSP等を追加する余地がある。
+ヘッダー不足自体は侵入の証拠ではない。現状の静的サイトでの影響と、将来フォームやログインを追加する場合の影響を区別する。
+Google Fontsとインラインstyleを考慮し、CSPは表示を壊さないよう検証して導入する。
+Access-Control-Allow-Origin: * は公開静的ページではそれだけで機密漏えいを意味しない。
+
+優先2: Gitとビルド管理
+node_modules以下4377ファイルがGit追跡対象。開発キャッシュやLinux用バイナリが混ざり、Macの既存環境ではビルドに失敗する。
+通常はnode_modulesとdist等の生成物を.gitignoreで除外し、package-lock.jsonからCIで再現可能にビルドする。
+現時点では.gitignoreや自動セキュリティ更新設定、独自CI設定を確認できなかった。
+生成物を管理する既存運用がある場合は、その運用を確認してから整理する。
+
+品質上の問題
+問い合わせフォームに送信処理・送信先の実装がなく、問い合わせが届く仕組みになっていない。
+これは情報窃取コードがあるという意味ではないが、問い合わせの取りこぼしにつながる。
+会社概要・問い合わせ・プライバシーポリシーには旧住所・旧社名表記が残っている。
+
+未確認で残る事項
+Vercel・GitHub・ドメイン管理会社のログイン履歴、2要素認証、所有者・メンバー・招待、APIトークン、SSH鍵、連携アプリ、Webhook、デプロイ・操作監査ログ。
+Vercelの環境変数、プロジェクト設定、デプロイ元コミットと実行履歴、他プロジェクトへの影響。
+GitHubのリモート側全ブランチ、削除履歴、Secret Scanning/Dependabot警告。
+DNS変更履歴、管理者メールの侵害、PC自体のマルウェア、過去の改ざんやアクセス。
+動的なブラウザー実行・コンソール・ネットワーク監視、認証済み内部診断、侵入テスト、負荷試験は実施していない。
+本調査は安全証明や侵入が一度もなかったことの保証ではない。
+
+参考一次情報
+React: https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components
+React Router: https://github.com/remix-run/react-router/security/advisories/GHSA-2w69-qvjg-hvjx
+Vite: https://github.com/vitejs/vite/security/advisories/GHSA-4w7w-66w2-5vf9
+
+生データ（一時ディレクトリ）
+/tmp/homepage-security-review/audit.json
+/tmp/homepage-security-review/audit-prod.json
+/tmp/homepage-security-review/public-checks.json
+/tmp/homepage-security-review/secret-scan.json
+/tmp/homepage-security-review/dependency-compare.json
+一時ディレクトリのデータはOSのクリーンアップで消える可能性がある。

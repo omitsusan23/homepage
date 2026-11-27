@@ -26,7 +26,7 @@ export default function Footer() {
           <div className="mt-2 text-xs text-gray-500">https://replay-0417.info</div>
         </div>
       </div>
-      <div className="text-center text-xs text-gray-400 mt-4">© {new Date().getFullYear()} 株式会社REPLAY</div>
+      <div className="text-center text-xs text-gray-400 mt-4">© {new Date().getFullYear()} 株式会社RePlay</div>
     </footer>
   )
 }

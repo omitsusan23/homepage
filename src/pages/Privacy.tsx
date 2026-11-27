@@ -52,8 +52,8 @@ export default function Privacy() {
             <div>
               本ポリシーに関するお問い合わせは、下記窓口までお願いいたします。
               <div className="mt-2">
-                株式会社REPLAY<br />
-                〒060-0063 北海道札幌市中央区南6条西3丁目10 セントラルビル三階<br />
+                株式会社RePlay<br />
+                〒060-0063 北海道札幌市中央区南６条西３丁目11-3 セントラルビル３階<br />
                 TEL: 011-252-9336<br />
                 Email: info@replay.co.jp
               </div>
